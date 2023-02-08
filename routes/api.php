@@ -17,3 +17,25 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('deneme', function(){
+
+    $collect = collect();
+     $number = 10;
+     while($number < 21){
+        $tam = $number.':'.'00';
+        $onbes = $number.':'.'15';
+        $bucuk = $number.':'.'30';
+        $kirkbes = $number.':'.'45';
+
+        $saat = [
+            'tam' => $tam,
+            'onbes' => $onbes,
+            'bucuk' => $bucuk,
+            'kirkbes' => $kirkbes
+        ];
+        $collect->push($saat);
+        $number++;
+    }
+    return $collect;
+});

@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('theatre_halls', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
-            $table->softDeletes();
-
+        Schema::create('rs_movies_genres', function (Blueprint $table) {
+            $table->foreignId('genre_id')->references('id')->on('movie_genres')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('movie_id')->references('id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('theatre_halls');
+        Schema::dropIfExists('rs_movies_genres');
     }
 };

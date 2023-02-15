@@ -16,10 +16,13 @@ return new class extends Migration
         Schema::create('screenings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('movie_id')->references('id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('session_id')->references('id')->on('sessions')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('hall_id')->references('id')->on('theatre_halls')->onDelete('cascade')->onUpdate('cascade');
-            $table->date('date');
+            $table->time('session_time');
+            $table->date('sessin_date');
+            $table->enum('language',['original language','subtitle','dubbing']);
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

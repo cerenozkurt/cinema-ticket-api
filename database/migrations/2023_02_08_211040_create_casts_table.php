@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('casts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('media_id')->references('id')->on('media')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('media_id')->references('id')->on('medias')->onDelete('cascade')->onUpdate('cascade');
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

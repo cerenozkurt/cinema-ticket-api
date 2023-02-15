@@ -9,6 +9,7 @@ use App\Models\Seats;
 use App\Models\Sessions;
 use App\Models\TheatreHall;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -36,49 +37,49 @@ class DatabaseSeeder extends Seeder
         }
 
 
+        //iptal ettim, yine de kalsın
         //SESSION CREATE
-        $number = 10;
-        while ($number < 21) {
-            Sessions::create([
-                'time' => $number.':'.'00',
-            ]);
+        // $number = 10;
+        // while ($number < 21) {
+        //     Sessions::create([
+        //         'time' => $number . ':' . '00',
+        //     ]);
 
-            Sessions::create([
-                'time' => $number.':'.'15',
-            ]);
+        //     Sessions::create([
+        //         'time' => $number . ':' . '15',
+        //     ]);
 
-            Sessions::create([
-                'time' => $number.':'.'30',
-            ]);
+        //     Sessions::create([
+        //         'time' => $number . ':' . '30',
+        //     ]);
 
-            Sessions::create([
-                'time' => $number.':'.'45',
-            ]);
+        //     Sessions::create([
+        //         'time' => $number . ':' . '45',
+        //     ]);
 
-            $number++;
+        //     $number++;
+        // }
+        // Sessions::create([
+        //     'time' => '21:00',
+        // ]);
 
-        }
-        Sessions::create([
-            'time' => '21:00',
-        ]);
-
+        
         //THEATRE HALL CREATE
-       $hall = 1;
-       while($hall <= 8) {
-        TheatreHall::create([
-            'name' => 'Salon '.$hall
-        ]);
-        $hall++;
-       }
+        $hall = 1;
+        while ($hall <= 8) {
+            TheatreHall::create([
+                'name' => 'Salon ' . $hall
+            ]);
+            $hall++;
+        }
 
-       Payment::create([
-        'title' => 'Student',
-        'price' => 30,
-       ]);
-       Payment::create([
-        'title' => 'Adult',
-        'price' => 50,
-       ]);
-      
+        Payment::create([
+            'title' => 'Student',
+            'price' => 30,
+        ]);
+        Payment::create([
+            'title' => 'Adult',
+            'price' => 50,
+        ]);
     }
 }

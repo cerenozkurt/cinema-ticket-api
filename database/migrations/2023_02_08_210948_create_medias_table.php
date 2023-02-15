@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('theatre_halls', function (Blueprint $table) {
+        Schema::create('medias', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->timestamps();
+            $table->text('filename');
             $table->softDeletes();
-
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('theatre_halls');
+        Schema::dropIfExists('medias');
     }
 };

@@ -5,4 +5,4 @@
 
 <h3> DB Schema </h3>
 
-![test-case-cinema-api](https://user-images.githubusercontent.com/33186246/217657051-4e827318-c096-4a0c-927b-42b0ffe578fa.png)
+![test-case-cinema-api (1)](https://user-images.githubusercontent.com/33186246/219161565-2b4be84a-f37c-4ca8-a245-c79cf1b75d0e.png)

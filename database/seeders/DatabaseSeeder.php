@@ -20,23 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-
-        //SEATS CREATE
-        $raws = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
-
-        foreach ((object)$raws as $raw) {
-            $number = 1;
-            while ($number <= 16) {
-                Seats::create([
-                    'raw' => $raw,
-                    'number' => $number
-                ]);
-                $number++;
-            }
-        }
-
-
+       
         //iptal ettim, yine de kalsın
         //SESSION CREATE
         // $number = 10;
@@ -63,23 +47,14 @@ class DatabaseSeeder extends Seeder
         //     'time' => '21:00',
         // ]);
 
-        
-        //THEATRE HALL CREATE
-        $hall = 1;
-        while ($hall <= 8) {
-            TheatreHall::create([
-                'name' => 'Salon ' . $hall
-            ]);
-            $hall++;
-        }
+        $this->call([
+            MovieSeeder::class,
+            PaymentSeeder::class,
+            SeatsSeeder::class,
+            TheatreHallSeeder::class
+        ]);
 
-        Payment::create([
-            'title' => 'Student',
-            'price' => 30,
-        ]);
-        Payment::create([
-            'title' => 'Adult',
-            'price' => 50,
-        ]);
+
+        
     }
 }

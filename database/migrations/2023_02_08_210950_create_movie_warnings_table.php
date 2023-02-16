@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('movie_warnings', function (Blueprint $table) {
             $table->id();
             $table->text('title');
-            $table->foreignId('media_id')->references('id')->on('medias')->onDelete('cascade')->onUpdate('cascade');
+            $table->text('description');
+            $table->text('icon_filename');
             $table->timestamps();
         });
     }

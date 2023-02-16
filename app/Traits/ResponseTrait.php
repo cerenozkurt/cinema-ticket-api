@@ -62,6 +62,7 @@ trait ResponseTrait
         ], 404);
     }
 
+    //Forbidden geçerli kimlik var ama kimlik sahibi işlem için yetkiye sahip değil 
     public function responseForbidden($message = null)
     {
         if ($message != null) {
@@ -76,6 +77,21 @@ trait ResponseTrait
         ], 403);
     }
 
+    //Unauthorized geçersiz kimlik bilgisi
+    public function responseUnauthorized($message = null)
+    {
+        if ($message != null) {
+            return new JsonResponse([
+                'result' => false,
+                'error' => $message
+            ], 401);
+        }
+        return new JsonResponse([
+            'result' => false,
+            'error' => 'not authorized'
+        ], 401);
+    }
+
     public function responseTryCatch($message = null, $status = 500)
     {
         if ($message != null) {
@@ -88,20 +104,6 @@ trait ResponseTrait
             'result' => false,
             'error' => 'an error occurred'
         ], $status);
-    }
-
-    public function responseUnauthorized($message = null, $status = 500)
-    {
-        if ($message != null) {
-            return new JsonResponse([
-                'result' => false,
-                'error' => $message
-            ], 401);
-        }
-        return new JsonResponse([
-            'result' => false,
-            'error' => 'not authorized'
-        ], 401);
     }
 
     public function responseDataCount($data)

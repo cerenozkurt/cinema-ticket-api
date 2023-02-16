@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Cast\CastStoreRequest;
 use App\Http\Requests\Cast\CastUpdateRequest;
+use App\Repository\CastRepositoryInterface;
 use Illuminate\Http\Request;
 
 class CastController extends Controller
 {
+    public $castRepository;
+    public function __construct(CastRepositoryInterface $castRepository)
+    {
+        $this->castRepository = $castRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,6 @@ class CastController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**

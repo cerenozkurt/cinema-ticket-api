@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Repository\Eloquent;
+namespace App\Repository;
 
 use App\Repository\BaseEloquentRepositoryInterface;
-use App\Repository\EloquentRepositoryInterface;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseRepository implements BaseEloquentRepositoryInterface

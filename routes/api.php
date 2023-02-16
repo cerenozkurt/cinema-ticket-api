@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CastController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -19,10 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('deneme', function(Request $request){
-    DB::table('universities')->insert([
-        'city' => $request->city,
-        'name' => $request->name,
-    ]);
-    
-});
+Route::post('deneme', [CastController::class, 'store']);

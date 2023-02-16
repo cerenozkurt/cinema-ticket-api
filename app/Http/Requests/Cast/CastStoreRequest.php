@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Cast;
 
+use App\Http\Requests\BaseFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCastsRequest extends FormRequest
+class CastStoreRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class StoreCastsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,9 @@ class StoreCastsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|max:150',
+            'media_id' => 'exists:medias,id',
+            'description' => 'max:1000',
         ];
     }
 }

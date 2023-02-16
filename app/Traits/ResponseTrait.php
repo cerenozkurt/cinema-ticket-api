@@ -33,18 +33,11 @@ trait ResponseTrait
             'result' => true,
         ], $status);
     }
-    public function responseValidation($validation, $data = null)
+    public function responseValidation($validation)
     {
-        if ($data != null) {
-            return new JsonResponse([
-                'result' => false,
-                'data' => $data,
-                'error' => $validation
-            ], 422);
-        }
         return new JsonResponse([
             'result' => false,
-            'error' => $validation
+            'validation_error' => $validation
         ], 422);
     }
 

@@ -26,7 +26,6 @@ class CastStoreRequest extends BaseFormRequest
     {
         return [
             'name' => 'required|max:150',
-            'media_id' => 'exists:medias,id',
             'description' => 'max:1000',
         ];
     }

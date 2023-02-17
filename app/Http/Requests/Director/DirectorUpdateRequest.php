@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Cast;
+namespace App\Http\Requests\Director;
 
-use App\Http\Requests\BaseFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CastUpdateRequest extends BaseFormRequest
+class DirectorUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

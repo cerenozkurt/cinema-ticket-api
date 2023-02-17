@@ -49,11 +49,9 @@ class CastController extends Controller
      */
     public function store(CastStoreRequest $request)
     {
-        $datas = [
-            'name' => $request->name,
-        ];
+        
 
-        $cast = $this->castRepository->create($datas);
+        $cast = $this->castRepository->create($request->all());
         if ($cast) {
             return $this->responseData(new CastResource($cast));
         }
@@ -84,10 +82,9 @@ class CastController extends Controller
      */
     public function update(CastUpdateRequest $request, $id)
     {
-        $datas = $request->all();
         $cast = $this->castRepository->findById($id);
         if ($cast) {
-            $this->castRepository->update($id, $datas);
+            $this->castRepository->update($id, $request->all());
             $cast = $this->castRepository->findById($id);
             return $this->responseData(new CastResource($cast));
         }

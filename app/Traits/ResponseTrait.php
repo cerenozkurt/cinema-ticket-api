@@ -21,6 +21,20 @@ trait ResponseTrait
         ], 200);
     }
 
+    public function responseSuccess($message = null)
+    {
+        if ($message != null) {
+            return new JsonResponse([
+                'result' => true,
+                'message' => $message,
+            ], 200);
+        }
+        return new JsonResponse([
+            'result' => true,
+            'data' => 'successful'
+        ], 200);
+    }
+
     public function responseError($message = null, $status = 500)
     {
         if ($message != null) {

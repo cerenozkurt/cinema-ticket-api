@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Seats;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Seat;
 use Illuminate\Database\Seeder;
 
 class SeatsSeeder extends Seeder
@@ -20,7 +19,7 @@ class SeatsSeeder extends Seeder
         foreach ((object)$raws as $raw) {
             $number = 1;
             while ($number <= 16) {
-                Seats::create([
+                Seat::create([
                     'raw' => $raw,
                     'number' => $number
                 ]);

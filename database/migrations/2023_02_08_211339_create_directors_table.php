@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('directors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('media_id')->references('id')->on('medias')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('media_id')->nullable()->references('id')->on('medias')->onUpdate('cascade')->onDelete('cascade');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

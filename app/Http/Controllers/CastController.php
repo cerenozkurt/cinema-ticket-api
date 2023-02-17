@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Cast\CastStoreRequest;
 use App\Http\Requests\Cast\CastUpdateRequest;
+use App\Http\Requests\MediaRequest;
+use App\Http\Resources\CastResource;
+use App\Http\Resources\MediaResource;
+use App\Models\Cast;
 use App\Repository\CastRepositoryInterface;
+use App\Traits\MediaTrait;
+use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
+
+use function Ramsey\Uuid\v2;
 
 class CastController extends Controller
 {
+    use ResponseTrait;
+    use MediaTrait;
+
     public $castRepository;
     public function __construct(CastRepositoryInterface $castRepository)
     {
@@ -22,6 +33,12 @@ class CastController extends Controller
      */
     public function index()
     {
+        $casts = $this->castRepository->all();
+
+        if (empty($casts)) {
+            return $this->responseData(CastResource::collection($casts));
+        }
+        return $this->responseDataNotFound('casts');
     }
 
     /**
@@ -32,6 +49,15 @@ class CastController extends Controller
      */
     public function store(CastStoreRequest $request)
     {
+        $datas = [
+            'name' => $request->name,
+        ];
+
+        $cast = $this->castRepository->create($datas);
+        if ($cast) {
+            return $this->responseData(new CastResource($cast));
+        }
+        return $this->responseError();
     }
 
     /**
@@ -42,7 +68,11 @@ class CastController extends Controller
      */
     public function show($id)
     {
-        //
+        $cast = $this->castRepository->findById($id);
+        if ($cast) {
+            return $this->responseData(new CastResource($cast));
+        }
+        return $this->responseDataNotFound('cast');
     }
 
     /**
@@ -54,7 +84,14 @@ class CastController extends Controller
      */
     public function update(CastUpdateRequest $request, $id)
     {
-        //
+        $datas = $request->all();
+        $cast = $this->castRepository->findById($id);
+        if ($cast) {
+            $this->castRepository->update($id, $datas);
+            $cast = $this->castRepository->findById($id);
+            return $this->responseData(new CastResource($cast));
+        }
+        return $this->responseDataNotFound('cast');
     }
 
     /**
@@ -65,6 +102,43 @@ class CastController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cast = $this->castRepository->findById($id);
+        if ($cast) {
+            $this->castRepository->deleteById($id);
+            return $this->responseSuccess('delete successfully');
+        }
+        return $this->responseDataNotFound('cast');
     }
+
+    // public function upload_image($cast, MediaRequest $request)
+    // {
+    //     $cast = Cast::find($cast);
+    //     if ($cast) {
+    //         $image = $this->upload_media($request->image, $cast, 'cast');
+
+    //         $datas = ['media_id' => $image->id];
+    //         $this->castRepository->update($cast->id, $datas);
+
+    //         if ($image) {
+    //             return $this->responseData(new MediaResource($image));
+    //         }
+    //         return $this->responseError();
+    //     }
+    //     return $this->responseDataNotFound('cast');
+    // }
+
+    // public function delete_image($cast_id)
+    // {
+    //     $cast = Cast::find($cast_id);
+    //     if ($cast) {
+    //         $image = $this->delete_media($cast,'cast');
+    //         return $image;
+
+    //         if ($image) {
+    //             return $this->responseSuccess('image delete successfully');
+    //         }
+    //         return $this->responseError();
+    //     }
+    //     return $this->responseDataNotFound('cast');
+    // }
 }

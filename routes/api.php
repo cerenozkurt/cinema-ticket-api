@@ -20,4 +20,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('deneme', [CastController::class, 'store']);
+Route::get('deneme', [CastController::class, 'index']);
+
+Route::controller(CastController::class)
+->prefix('cast')
+->group(function(){
+    Route::get('','index');
+    Route::post('','store');
+    Route::get('/{cast}','show');
+    Route::put('/{cast}','update');
+    Route::delete('/{cast}','destroy');
+    //Route::post('/{cast}/image','upload_image');
+    //Route::delete('/{id}/image','delete_image');
+});

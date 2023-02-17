@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('raw');
             $table->integer('number');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -18,10 +18,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('duration_min');
-            $table->foreignId('media_id')->references('id')->on('medias')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('director_id')->references('id')->on('directors')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('language_id')->references('id')->on('movie_languages')->onDelete('cascade')->onUpdate('cascade');
-            $table->json('movie_warnings');
+            $table->foreignId('media_id')->nullable()->references('id')->on('medias')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('language_id')->references('id')->on('movie_languages')->onUpdate('cascade')->onDelete('cascade');
+            $table->json('movie_warnings')->nullable();
             $table->text('trailer_url')->nullable();
             $table->timestamps();
             $table->softDeletes();

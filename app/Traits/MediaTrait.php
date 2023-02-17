@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Media;
+use App\Repository\MediaRepositoryInterface;
 use Illuminate\Support\Facades\Storage;
 
 trait MediaTrait
@@ -28,21 +29,20 @@ trait MediaTrait
             }
         } else {
             $media = Media::create([
-                'filename' => $filename
+                'filename' => $public_path . "/" . $filename
             ]);
         }
         return $media;
     }
 
-    public function delete_media($model, $media_id, $public_path = 'other')
+    public function delete_media($model, $public_path = 'other')
     {
-        $media = Media::where('id', $model->$media_id)->first();
+        $media = Media::where('id', $model->media_id)->first();
         if ($media->filename && file_exists(public_path("uploads/" . $public_path . "/" . $media->filename))) {
             unlink(public_path("uploads/" . $public_path . "/" . $media->filename));
         }
-        $success = $media->delete();
-        $media->save();
-        $model->$media_id = null;
+        $success = $media->delete(); 
+        $model->media_id = null;
         $model->save();
         return $success;
     }

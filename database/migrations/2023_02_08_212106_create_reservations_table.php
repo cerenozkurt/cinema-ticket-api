@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('rs_seats_screening_id')->references('id')->on('rs_seats_screening')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('payment_id')->references('id')->on('payments')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+            $table->softDeletes();  
         });
     }
 

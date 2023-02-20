@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('rs_casts_movies', function (Blueprint $table) {
             $table->foreignId('cast_id')->references('id')->on('casts')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('movie_id')->references('id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
+            $table->softDeletes();
         });
     }
 

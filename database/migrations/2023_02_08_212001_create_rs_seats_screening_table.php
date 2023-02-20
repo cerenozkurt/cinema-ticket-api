@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('seat_id')->references('id')->on('seats')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('screening_id')->references('id')->on('screenings')->onDelete('cascade')->onUpdate('cascade');
             $table->enum('status',[1,0])->default(0);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

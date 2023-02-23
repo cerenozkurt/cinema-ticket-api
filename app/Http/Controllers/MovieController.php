@@ -35,7 +35,7 @@ class MovieController extends Controller
     {
         $movies = $this->movieRepository->all();
 
-        if (empty($movies)) {
+        if (!empty($movies)) {
             return $this->responseData(MovieResource::collection($movies));
         }
         return $this->responseDataNotFound('movies');

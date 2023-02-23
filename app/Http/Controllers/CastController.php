@@ -7,6 +7,7 @@ use App\Http\Requests\Cast\CastUpdateRequest;
 use App\Http\Requests\MediaRequest;
 use App\Http\Resources\CastResource;
 use App\Http\Resources\MediaResource;
+use App\Http\Resources\MovieResource;
 use App\Models\Cast;
 use App\Repository\CastRepositoryInterface;
 use App\Traits\MediaTrait;
@@ -34,8 +35,7 @@ class CastController extends Controller
     public function index()
     {
         $casts = $this->castRepository->all();
-
-        if (empty($casts)) {
+        if (!empty($casts)) {
             return $this->responseData(CastResource::collection($casts));
         }
         return $this->responseDataNotFound('casts');
@@ -68,7 +68,9 @@ class CastController extends Controller
     {
         $cast = $this->castRepository->findById($id);
         if ($cast) {
+            $cast->movie  = MovieResource::collection($cast->movies);
             return $this->responseData(new CastResource($cast));
+
         }
         return $this->responseDataNotFound('cast');
     }
@@ -106,6 +108,8 @@ class CastController extends Controller
         }
         return $this->responseDataNotFound('cast');
     }
+
+    
 
     // public function upload_image($cast, MediaRequest $request)
     // {

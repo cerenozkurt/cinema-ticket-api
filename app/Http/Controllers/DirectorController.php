@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Director\DirectorStoreRequest;
 use App\Http\Requests\Director\DirectorUpdateRequest;
 use App\Http\Resources\DirectorResource;
+use App\Http\Resources\MovieResource;
 use App\Repository\DirectorRepositoryInterface;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
@@ -59,6 +60,7 @@ class DirectorController extends Controller
     {
         $director = $this->directorRepository->findById($id);
         if ($director) {
+            $director->movie  = MovieResource::collection($director->movies);
             return $this->responseData(new DirectorResource($director));
         }
         return $this->responseDataNotFound('director');

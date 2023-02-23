@@ -19,7 +19,9 @@ class DirectorResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'media' => $this->media == null ? null : new MediaResource(Media::find($this->media_id))
+            'media' => $this->media == null ? null : new MediaResource(Media::find($this->media_id)),
+            'movies' => $this->when($this->movie != null, $this->movie)
+
         ];
     }
 }
